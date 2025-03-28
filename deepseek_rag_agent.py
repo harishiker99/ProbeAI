@@ -86,7 +86,7 @@ st.session_state.model_version = st.sidebar.radio(
     help=model_help
 )
 # st.sidebar.info("ollama pull deepseek-r1:1.5b")
-st.sidebar.info("ollama serve deepseek-r1:7b")
+st.sidebar.info("ollama serve deepseek-r1:1.5b")
 
 # RAG Mode Toggle
 st.sidebar.header("RAG Configuration")
