@@ -313,9 +313,9 @@ def check_document_relevance(query: str, vector_store, threshold: float = 0.7) -
         
     retriever = vector_store.as_retriever(
         search_type="similarity_score_threshold",
-        search_kwargs={"k": 5, "score_threshold": threshold}
+        search_kwargs={"k": 3, "score_threshold": threshold}
     )
-    docs = retriever.invoke(query)
+    docs = retriever.get_relevant_documents(query)
     return bool(docs), docs
 
 
@@ -385,11 +385,11 @@ if prompt:
                 retriever = st.session_state.vector_store.as_retriever(
                     search_type="similarity_score_threshold",
                     search_kwargs={
-                        "k": 5, 
+                        "k": 3, 
                         "score_threshold": st.session_state.similarity_threshold
                     }
                 )
-                docs = retriever.invoke(rewritten_query)
+                docs = retriever.get_relevant_documents(rewritten_query)
                 if docs:
                     context = "\n\n".join([d.page_content for d in docs])
                     st.info(f"📊 Found {len(docs)} relevant documents (similarity > {st.session_state.similarity_threshold})")
